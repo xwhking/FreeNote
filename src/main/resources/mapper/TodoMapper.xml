@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwhking.freenotebackend.mapper.TodoMapper">
+
+    <resultMap id="BaseResultMap" type="com.xwhking.freenotebackend.model.entity.Todo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="todoProfile" column="todoProfile" jdbcType="VARCHAR"/>
+            <result property="isFinish" column="ifFinish" jdbcType="INTEGER"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userId,title,
+        todoProfile,ifFinish,createTime,
+        updateTime,isDelete
+    </sql>
+    <select id="getTodayList" resultType="com.xwhking.freenotebackend.model.entity.Todo">
+        select * from todo where DATE(createTime) =#{todayDate} and userId = #{userId} and isDelete = 0 order by todo.createTime desc ;
+    </select>
+</mapper>

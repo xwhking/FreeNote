@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xwhking.freenotebackend.mapper.HabitrecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.xwhking.freenotebackend.model.entity.Habitrecord">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="habitId" column="habitId" jdbcType="BIGINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+            <result property="habitProfile" column="habitProfile" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,habitId,createTime,
+        updateTime,isDelete,habitProfile
+    </sql>
+    <select id="getRecord"  resultType="com.xwhking.freenotebackend.model.entity.Habitrecord" >
+        select * from habitrecord where DATE(createTime) = #{date} and habitId = #{habitId} and isDelete = 0  limit 1;
+    </select>
+</mapper>
